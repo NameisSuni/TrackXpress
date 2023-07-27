@@ -14,6 +14,7 @@ const LoginPage = ({ onLogin }) => {
     }
   };
 
+
   return (
     <div className="login-container">
       <h1>TrackXpress</h1>

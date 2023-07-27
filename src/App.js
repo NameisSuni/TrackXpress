@@ -1,44 +1,38 @@
 import React, { useState } from 'react';
+import './App.css';
 import LoginPage from './Components/LoginPage';
-import CustomerManagementPage from './Components/CustomerManagementPage';
+import CustomerPage from './Components/CustomerPage';
 import MapPage from './Components/MapPage';
-import RealTimeLocationTracking from './Components/RealTimeLocationTracking';
 
-const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+function App() {
   const [customers, setCustomers] = useState([]);
-  const [driverLocation, setDriverLocation] = useState(null);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleAddCustomer = (customer) => {
     setCustomers([...customers, customer]);
-  };
+  }
 
-  const handleUpdateDriverLocation = (location) => {
-    setDriverLocation(location);
-  };
+  const handleLogin = () => {
+    setIsLogin(true);
+  }
+
+  const handleLogout = () => {
+    setIsLogin(false);
+  }
 
   return (
-    <div>
-      {!isLoggedIn && <LoginPage onLogin={handleLogin} />}
-      {isLoggedIn && (
+    <div className="App">
+      {!isLogin && <LoginPage onLogin={handleLogin} />}
+      {isLogin && (
         <div>
-          <CustomerManagementPage onAddCustomer={handleAddCustomer} />
+          <CustomerPage onAddCustomer={handleAddCustomer} />
           <MapPage customers={customers} />
-          <RealTimeLocationTracking onUpdateLocation={handleUpdateDriverLocation} />
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout}>Log Out</button>
         </div>
       )}
     </div>
   );
-
-};
+}
 
 export default App;
